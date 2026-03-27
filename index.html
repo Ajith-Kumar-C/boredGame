@@ -2,32 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Game Portal</title>
+    <title>Dragon Arcade - Home</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #222; color: white; }
-        .container { display: flex; justify-content: center; gap: 20px; margin-top: 50px; }
-        .game-card { 
-            border: 2px solid #444; padding: 20px; width: 150px; 
-            cursor: pointer; transition: 0.3s; background: #333; border-radius: 10px;
+        body { 
+            display: flex; flex-direction: column; align-items: center; 
+            background: #c7ecee; font-family: 'Courier New', monospace; margin: 0; padding: 20px;
         }
-        .game-card:hover { transform: scale(1.1); background: #444; border-color: #00ff00; }
-        a { text-decoration: none; color: inherit; }
+        h1 { color: #2f3542; text-shadow: 2px 2px #f9ca24; font-size: 3rem; margin-bottom: 10px; }
+        p { color: #535c68; font-weight: bold; margin-bottom: 40px; }
+
+        /* The Game Grid */
+        #gameGrid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 25px; width: 100%; max-width: 900px; 
+        }
+
+        /* Lego Card Style */
+        .game-card {
+            background: #ffffff; border: 4px solid #2f3542; border-radius: 10px;
+            padding: 20px; text-align: center; text-decoration: none; color: #2f3542;
+            box-shadow: 0 8px 0 #2f3542; transition: all 0.2s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .game-card:hover { transform: translateY(-5px); box-shadow: 0 13px 0 #2f3542; background: #f9ca24; }
+        .game-card h2 { margin: 10px 0 0 0; text-transform: uppercase; font-size: 1.2rem; }
+        
+        /* Decorative Lego Nubs */
+        .nubs { display: flex; gap: 10px; margin-bottom: 15px; }
+        .nub { width: 15px; height: 15px; background: #2f3542; border-radius: 50%; opacity: 0.2; }
+
+        .loading { font-size: 1.5rem; color: #2f3542; margin-top: 50px; }
+        
+        /* Hide internal GitHub folders */
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <h1>Welcome to My Arcade</h1>
-    <div class="container">
-        <a href="JumpOrDie/index.html">
-            <div class="game-card">
-                <h2>🏃</h2>
-                <p>Dragon Run</p>
-            </div>
-        </a>
 
-        <div class="game-card" style="opacity: 0.5;">
-            <h2>❓</h2>
-            <p>Coming Soon</p>
-        </div>
-    </div>
+    <h1>DRAGON ARCADE</h1>
+    <p>SELECT YOUR CHALLENGE</p>
+
+    <div id="loading" class="loading">SCANNING SYSTEM...</div>
+    <div id="gameGrid"></div>
+
+    <script>
+        // CONFIG: Update these to match your details
+        const GITHUB_USER = "Ajith-Kumar-C";
+        const REPO_NAME = "boredGame";
+        const BRANCH = "Dragon-Run";
+
+        async function fetchGames() {
+            const grid = document.getElementById('gameGrid');
+            const loader = document.getElementById('loading');
+
+            try {
+                // Fetch contents of the repository via GitHub API
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents?ref=${BRANCH}`);
+                const data = await response.json();
+
+                loader.classList.add('hidden');
+
+                data.forEach(item => {
+                    // Only process folders and exclude hidden ones (like .github)
+                    if (item.type === 'dir' && !item.name.startsWith('.')) {
+                        createCard(item.name);
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching games:", error);
+                loader.innerText = "FAILED TO LOAD ARCADE.";
+            }
+        }
+
+        function createCard(folderName) {
+            const grid = document.getElementById('gameGrid');
+            
+            // Clean up folder names for display (e.g., "JumpOrDie" -> "Jump Or Die")
+            const displayName = folderName.replace(/([A-Z])/g, ' $1').trim();
+
+            const card = document.createElement('a');
+            card.href = `./${folderName}/index.html`;
+            card.className = 'game-card';
+            
+            card.innerHTML = `
+                <div class="nubs">
+                    <div class="nub"></div>
+                    <div class="nub"></div>
+                </div>
+                <h2>${displayName}</h2>
+            `;
+
+            grid.appendChild(card);
+        }
+
+        // Initialize
+        fetchGames();
+    </script>
 </body>
 </html>

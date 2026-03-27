@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arcade Sketch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ui-container">
+        <a href="../index.html" id="homeBtn">⬅ Home</a>
+        <div class="stats-top">DRAW: <span id="wordToDraw">DRAGON</span></div>
+    </div>
+    <div class="game">
+        <canvas id="paintCanvas" width="500" height="300"></canvas>
+        <div class="controls">
+            <button onclick="clearCanvas()">CLEAR</button>
+            <button onclick="nextWord()">NEXT WORD</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

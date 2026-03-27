@@ -50,3 +50,4 @@ body { display: flex; flex-direction: column; align-items: center; background: #
 @keyframes moveClouds { from { left: 650px; } to { left: -100px; } }
 
 .hidden { display: none !important; }
+.frozen .cloud { animation-play-state: paused; }
