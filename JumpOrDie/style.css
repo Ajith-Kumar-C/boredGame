@@ -23,7 +23,6 @@ body {
     position: absolute; 
     bottom: 0; 
     left: 50px; 
-    transition: bottom 0.1s; 
 }
 
 #block { 
@@ -32,7 +31,7 @@ body {
     font-size: 25px; 
     position: absolute; 
     bottom: 0; 
-    left: 600px; /* This is the starting position outside the box */
+    left: 600px; 
 }
 
 .animate { 
