@@ -1,15 +1,14 @@
-*{ padding: 0; margin: 0; }
-.game{ width: 500px; height: 200px; border: 1px solid black; margin: auto; overflow: hidden; }
-#character{ width: 20px; height: 50px; background-color: red; position: relative; top: 150px; }
-#block{ width: 20px; height: 20px; background-color: blue; position: relative; top: 130px; left: 480px; animation: block 1s infinite linear; }
-@keyframes block{
-    0%{left: 480px}
-    100%{left: -20px}
+body { display: flex; flex-direction: column; align-items: center; background: #f0f0f0; font-family: sans-serif; }
+.game { width: 600px; height: 200px; border-bottom: 2px solid #555; margin-top: 50px; position: relative; overflow: hidden; background: white; }
+#character { width: 40px; height: 40px; font-size: 35px; position: absolute; bottom: 0; left: 50px; }
+#block { width: 30px; height: 30px; font-size: 25px; position: absolute; bottom: 0; right: -50px; }
+.animate { animation: jump 0.5s linear; }
+@keyframes jump {
+    0% { bottom: 0; }
+    30% { bottom: 100px; }
+    70% { bottom: 100px; }
+    100% { bottom: 0; }
 }
-.animate{ animation: jump 0.3s linear; }
-@keyframes jump{
-    0%{top: 150px;}
-    30%{top: 100px;}
-    70%{top: 100px;}
-    100%{top: 150px;}
-}
+#pauseOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); color: white; display: flex; justify-content: center; align-items: center; font-size: 30px; z-index: 10; }
+.hidden { display: none !important; }
+.stats { margin-top: 10px; font-weight: bold; }
