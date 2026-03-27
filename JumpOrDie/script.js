@@ -6,7 +6,7 @@ const pauseOverlay = document.getElementById("pauseOverlay");
 let score = 0;
 let isPaused = false;
 let blockPos = 600;
-let speed = 5; 
+let speed = 6; // Starting speed
 
 function gameLoop() {
     if (!isPaused) {
@@ -14,9 +14,9 @@ function gameLoop() {
         
         // If block goes off screen
         if (blockPos < -30) {
-            blockPos = 600 + Math.random() * 300; // Randomize gap
+            blockPos = 600 + Math.random() * 300; 
             score++;
-            speed += 0.3; // This increases difficulty every point!
+            speed += 0.5; // Difficulty increases by 0.5 every time!
             scoreSpan.innerHTML = score;
         }
         
@@ -25,8 +25,8 @@ function gameLoop() {
         // Collision Logic
         let characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
         
-        // Check if character is hitting the block
-        if (blockPos < 90 && blockPos > 50 && characterBottom < 35) {
+        // Refined collision box for the emojis
+        if (blockPos < 80 && blockPos > 50 && characterBottom < 30) {
             alert("Game Over! Score: " + score);
             resetGame();
         }
@@ -36,7 +36,7 @@ function gameLoop() {
 
 function resetGame() {
     score = 0;
-    speed = 5;
+    speed = 6;
     blockPos = 600;
     scoreSpan.innerHTML = score;
     character.classList.remove("animate");
