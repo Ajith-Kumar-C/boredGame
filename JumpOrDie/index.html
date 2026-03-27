@@ -2,21 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jump Or Die - Arcade</title>
+    <title>Lego Jump Arcade</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="../index.html" id="homeBtn">⬅ Home</a>
+    <div class="ui-container">
+        <a href="../index.html" id="homeBtn">⬅ Home</a>
+        <div class="stats-top">
+            <span>SCORE: <span id="scoreSpan">0</span></span>
+            <span style="color: #ff4757;">HI: <span id="highScoreSpan">0</span></span>
+        </div>
+    </div>
 
     <div class="game" id="gameCanvas">
         <div id="startScreen">
             <h1>LEGO JUMP</h1>
-            <p>Space to Jump | P to Pause</p>
-            <button class="start-btn" onclick="startGame()">CLICK TO START</button>
+            <p>SPACE TO JUMP | P TO PAUSE</p>
+            <button class="start-btn" onclick="startGame()">START GAME</button>
         </div>
 
         <div class="cloud" style="top: 20px; left: 100px;">☁️</div>
-        <div class="cloud" style="top: 60px; left: 350px;">☁️</div>
+        <div class="cloud" style="top: 50px; left: 400px;">☁️</div>
         
         <div id="character" class="hidden">
             <div class="lego-nub"></div>
@@ -33,16 +39,13 @@
         <button id="pauseBtn" class="hidden" onclick="togglePause()">Pause</button>
 
         <div id="gameOverBanner" class="hidden">
-            <h1>CRASHED!</h1>
-            <p>Score: <span id="finalScore">0</span></p>
-            <p>Best: <span id="bestScore">0</span></p>
-            <button class="restart-btn" onclick="resetGame()">Try Again</button>
+            <h2>CRASHED!</h2>
+            <div class="banner-scores">
+                <p>SCORE: <span id="finalScore">0</span></p>
+                <p>BEST: <span id="bestScore">0</span></p>
+            </div>
+            <button class="restart-btn" onclick="resetGame()">TRY AGAIN</button>
         </div>
-    </div>
-
-    <div class="stats">
-        <span>Score: <span id="scoreSpan">0</span></span>
-        <span style="margin-left: 20px; color: #ff4757;">HI: <span id="highScoreSpan">0</span></span>
     </div>
 
     <script src="script.js"></script>

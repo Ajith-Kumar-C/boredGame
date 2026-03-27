@@ -25,14 +25,17 @@ function startGame() {
     gameLoop();
 }
 
-function createTree(offsetX = 0) {
+function createTree(offsetX = 0, isSmall = false) {
     const treeDiv = document.createElement("div");
     treeDiv.classList.add("tree");
+    if (isSmall) treeDiv.classList.add("small-tree");
+    
     treeDiv.innerHTML = `<div class="tree-leaves"></div><div class="tree-trunk"></div>`;
     
     let treeObj = {
         element: treeDiv,
-        x: 650 + offsetX
+        x: 650 + offsetX,
+        width: isSmall ? 22 : 30 // Smaller hit detection for small trees
     };
     
     treeContainer.appendChild(treeDiv);
@@ -40,19 +43,23 @@ function createTree(offsetX = 0) {
 }
 
 function spawnTreeGroup() {
-    // Randomly decide group size: 1, 2, or 3 trees
-    const count = Math.floor(Math.random() * 3) + 1;
-    for (let i = 0; i < count; i++) {
-        // Clump them close together (50px gap)
-        createTree(i * 55); 
+    // Randomly decide: 1 tree or 2 trees (A pair)
+    const isPair = Math.random() > 0.6;
+    
+    if (isPair) {
+        // Create a pair: One normal, one small, very close together (45px apart)
+        createTree(0, false);
+        createTree(45, true); 
+    } else {
+        // Create a single tree (randomly normal or small)
+        createTree(0, Math.random() > 0.7);
     }
 }
 
 function gameLoop() {
     if (!isPaused && !isGameOver && gameStarted) {
-        // Spawn Logic: Check if the last tree is far enough to start a new group
-        if (trees.length === 0 || trees[trees.length - 1].x < 250) {
-            // Random chance to spawn a group if screen is clearing
+        // Spawn Logic: Check if screen is clear or large gap exists
+        if (trees.length === 0 || trees[trees.length - 1].x < 300) {
             if (Math.random() > 0.98 || trees.length === 0) {
                 spawnTreeGroup();
             }
@@ -65,17 +72,18 @@ function gameLoop() {
 
             // Collision Detection
             let charBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
-            if (tree.x < 85 && tree.x > 45 && charBottom < 45) {
+            // Human is at x: 50 to 84. Tree hit box adjusted for size.
+            if (tree.x < 80 && tree.x > 45 && charBottom < 45) {
                 handleGameOver();
             }
 
             // Scoring and Cleanup
-            if (tree.x < -40) {
+            if (tree.x < -50) {
                 tree.element.remove();
                 trees.splice(i, 1);
                 score++;
                 scoreSpan.innerHTML = score;
-                speed += 0.02; // Very minimal speed increase
+                speed += 0.01; // Extremely minimal speed increase
             }
         }
         requestAnimationFrame(gameLoop);
