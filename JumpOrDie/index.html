@@ -6,24 +6,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameGuidance">Space to Jump | P to Pause</div>
+    <a href="../index.html" id="homeBtn">⬅ Home</a>
+
     <div class="game" id="gameCanvas">
+        <div id="startScreen">
+            <h1>LEGO JUMP</h1>
+            <p>Space to Jump | P to Pause</p>
+            <button class="start-btn" onclick="startGame()">CLICK TO START</button>
+        </div>
+
         <div class="cloud" style="top: 20px; left: 100px;">☁️</div>
         <div class="cloud" style="top: 60px; left: 350px;">☁️</div>
         
-        <div id="character">
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="leg left"></div>
-            <div class="leg right"></div>
+        <div id="character" class="hidden">
+            <div class="lego-nub"></div>
+            <div class="lego-head"></div>
+            <div class="lego-torso"></div>
+            <div class="lego-legs">
+                <div class="leg left"></div>
+                <div class="leg right"></div>
+            </div>
         </div>
         
         <div id="treeContainer"></div>
         
-        <button id="pauseBtn" onclick="togglePause()">Pause</button>
+        <button id="pauseBtn" class="hidden" onclick="togglePause()">Pause</button>
 
         <div id="gameOverBanner" class="hidden">
-            <h1>GAME OVER</h1>
+            <h1>CRASHED!</h1>
             <p>Score: <span id="finalScore">0</span></p>
             <p>Best: <span id="bestScore">0</span></p>
             <button class="restart-btn" onclick="resetGame()">Try Again</button>
