@@ -44,8 +44,8 @@ function createTree(offsetX = 0, isSmall = false, isScoring = false) {
 function spawnTreeGroup() {
     const isPair = Math.random() > 0.6;
     if (isPair) {
-        createTree(0, false, true); // First tree scores
-        createTree(50, true, false); // Second doesn't
+        createTree(0, false, true); // This tree has 'isScoring: true'
+        createTree(55, true, false); // This one is just an obstacle
     } else {
         createTree(0, Math.random() > 0.5, true);
     }

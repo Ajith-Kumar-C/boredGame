@@ -5,24 +5,29 @@
     <title>ARCADE ARENA</title>
     <link rel="stylesheet" href="common.css">
     <style>
-        #gameGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; width: 90%; max-width: 1000px; margin-top: 40px; }
-        .card { background: var(--primary-dark); border-radius: 20px; padding: 10px; text-decoration: none; box-shadow: 0 10px 0 #111; }
-        .screen { background: #95afc0; aspect-ratio: 1/1; border-radius: 10px; border: 4px solid #111; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; text-align: center; }
-        .card:hover .screen { background: var(--lego-yellow); color: var(--primary-dark); }
+        h1 { margin-top: 50px; text-shadow: 3px 3px var(--lego-yellow); font-size: 3rem; }
+        #gameGrid { 
+            display: grid; grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; width: 90%; max-width: 500px; margin-top: 30px; 
+        }
+        .tile {
+            background: var(--primary-dark); aspect-ratio: 1/1; border-radius: 15px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-decoration: none; color: white; border: 4px solid #111;
+            box-shadow: 0 8px 0 #111; transition: 0.2s;
+        }
+        .tile:hover { transform: translateY(-4px); background: var(--lego-yellow); color: #111; }
+        .tile i { font-size: 40px; margin-bottom: 10px; }
+        .tile span { font-weight: bold; font-size: 14px; text-align: center; }
     </style>
 </head>
 <body>
-    <h1 style="font-size: 4rem; text-shadow: 4px 4px var(--lego-yellow);">ARCADE ARENA</h1>
-    <div id="gameGrid"></div>
-
-    <script>
-        const folders = ["JumpOrDie", "XO", "Pictionary"]; // You can also use the GitHub API fetch logic here
-        const grid = document.getElementById('gameGrid');
-
-        folders.forEach(f => {
-            const name = f.replace(/([A-Z])/g, ' $1').toUpperCase();
-            grid.innerHTML += `<a href="./${f}/index.html" class="card"><div class="screen"><h2>${name}</h2></div></a>`;
-        });
-    </script>
+    <h1>ARCADE ARENA</h1>
+    <div id="gameGrid">
+        <a href="./JumpOrDie/index.html" class="tile"><i>🏃</i><span>DRAGON JUMP</span></a>
+        <a href="./XO/index.html" class="tile"><i>❌</i><span>XO BLOCK</span></a>
+        <a href="./Pictionary/index.html" class="tile"><i>🎨</i><span>SKETCH IT</span></a>
+        <div class="tile" style="opacity:0.5"><i>🔒</i><span>MORE SOON</span></div>
+    </div>
 </body>
 </html>

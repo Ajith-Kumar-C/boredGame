@@ -1,57 +1,48 @@
-/* SHARED RETRO ARCADE THEME */
 :root {
     --primary-dark: #2f3542;
     --lego-yellow: #f9ca24;
     --arcade-bg: #c7ecee;
-    --crt-green: #27ae60;
     --danger-red: #eb4d4b;
 }
 
 body { 
     display: flex; flex-direction: column; align-items: center; 
     background: var(--arcade-bg); font-family: 'Courier New', monospace; 
-    margin: 0; padding: 10px; box-sizing: border-box;
+    margin: 0; padding: 20px; overflow: hidden;
 }
 
-/* Unified Navigation Container */
-.ui-container { 
-    width: 95%; max-width: 600px; display: flex; 
-    justify-content: space-between; align-items: center; margin: 15px 0; 
+/* Common UI Header */
+.ui-header { 
+    width: 90vw; max-width: 500px; display: flex; 
+    justify-content: space-between; align-items: center; margin-bottom: 10px; 
 }
 
-/* Synced Retro Buttons */
-#homeBtn, .restart-btn, #pauseBtn, .start-btn, button {
-    background: var(--primary-dark); color: white; border: none; padding: 10px 20px;
+#homeBtn, .restart-btn, button {
+    background: var(--primary-dark); color: white; border: none; padding: 8px 15px;
     border-radius: 5px; cursor: pointer; font-family: inherit; font-weight: bold;
-    box-shadow: 0 4px 0 #111; text-decoration: none; display: inline-block;
-    transition: transform 0.1s;
+    box-shadow: 0 4px 0 #111; text-decoration: none; font-size: 14px;
 }
-#homeBtn:active, button:active { transform: translateY(2px); box-shadow: 0 2px 0 #111; }
+#homeBtn:hover, button:hover { background: #57606f; }
 
-/* The Retro TV Monitor (The "Bezel") */
-.game-container { 
-    width: 95vw; max-width: 80vh; aspect-ratio: 1/1; 
-    border: 15px solid var(--primary-dark); border-radius: 40px; 
+/* The Retro Square Monitor */
+.game-monitor { 
+    width: 90vw; max-width: 500px; aspect-ratio: 1/1; 
+    border: 12px solid var(--primary-dark); border-radius: 30px; 
     position: relative; overflow: hidden; background: white;
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.1), 0 20px 0 #1a1e26;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.1), 0 15px 0 #1a1e26;
 }
 
-/* CRT Scanline Effect Overlay */
-.game-container::after {
+/* Scanline Effect */
+.game-monitor::after {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-    background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 50;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%);
+    background-size: 100% 4px; pointer-events: none; z-index: 100;
 }
 
-/* Shared Game Over Banner */
-.banner { 
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-    background: rgba(255, 255, 255, 0.95); padding: 25px; border: 4px solid var(--danger-red); 
-    text-align: center; z-index: 100; border-radius: 10px; min-width: 200px;
+.banner {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: white; padding: 20px; border: 4px solid var(--primary-dark);
+    text-align: center; z-index: 110; border-radius: 10px; width: 70%;
 }
 
 .hidden { display: none !important; }
-
-/* Cloud stop logic */
-.frozen .cloud { animation-play-state: paused !important; }
