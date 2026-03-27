@@ -6,10 +6,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameGuidance">Press Space to Jump | Click Pause to stop</div>
+    <div id="gameGuidance">Press Space to Jump | P to Pause</div>
     <div class="game" id="gameCanvas">
-        <div id="character">🏃</div>
-        <div id="block">🌵</div>
+        <div id="character">
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+        </div>
+        
+        <div id="block">
+            <div class="leaves"></div>
+            <div class="trunk"></div>
+        </div>
         
         <button id="pauseBtn" onclick="togglePause()">Pause</button>
 

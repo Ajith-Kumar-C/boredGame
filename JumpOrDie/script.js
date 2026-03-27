@@ -9,25 +9,34 @@ let score = 0;
 let isPaused = false;
 let isGameOver = false;
 let blockPos = 600;
-let speed = 6; 
+let baseSpeed = 5; 
+let speed = baseSpeed;
 
 function gameLoop() {
     if (!isPaused && !isGameOver) {
-        blockPos -= speed;
+        blockPos -= speed; // Move RIGHT to LEFT
         
-        if (blockPos < -30) {
-            blockPos = 600 + Math.random() * 300; 
+        if (blockPos < -40) {
+            blockPos = 600 + Math.random() * 200; 
             score++;
-            speed += 0.4; // Increases speed every point
             scoreSpan.innerHTML = score;
+
+            // Tiered Difficulty Logic
+            if (score >= 30) {
+                speed = baseSpeed + 3; // Much faster after 30
+            } else if (score >= 10) {
+                speed = baseSpeed + 1.5; // Slightly faster after 10
+            } else {
+                speed = baseSpeed; // Normal speed at start
+            }
         }
         
         block.style.left = blockPos + "px";
 
         let charBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
         
-        // Collision Detection
-        if (blockPos < 80 && blockPos > 50 && charBottom < 30) {
+        // Accurate collision for the new box sizes
+        if (blockPos < 80 && blockPos > 50 && charBottom < 40) {
             handleGameOver();
         }
     }
@@ -42,7 +51,7 @@ function handleGameOver() {
 
 function resetGame() {
     score = 0;
-    speed = 6;
+    speed = baseSpeed;
     blockPos = 600;
     isGameOver = false;
     scoreSpan.innerHTML = "0";
@@ -57,9 +66,9 @@ function togglePause() {
 document.addEventListener("keydown", (e) => {
     if (e.code === "Space" && !character.classList.contains("animate") && !isPaused && !isGameOver) {
         character.classList.add("animate");
-        setTimeout(() => character.classList.remove("animate"), 500);
+        setTimeout(() => character.classList.remove("animate"), 600);
     }
+    if (e.code === "KeyP") togglePause();
 });
 
-// Start the game loop
 gameLoop();

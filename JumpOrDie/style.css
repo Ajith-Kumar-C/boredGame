@@ -1,92 +1,38 @@
-body { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    background: #f0f0f0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-}
-
+body { display: flex; flex-direction: column; align-items: center; background: #f0f0f0; font-family: sans-serif; }
 #gameGuidance { margin-top: 20px; color: #666; }
 
 .game { 
-    width: 600px; 
-    height: 200px; 
-    border-bottom: 2px solid #555; 
-    margin-top: 20px; 
-    position: relative; 
-    overflow: hidden; 
-    background: white; 
+    width: 600px; height: 200px; border-bottom: 4px solid #333; 
+    margin-top: 20px; position: relative; overflow: hidden; background: white; 
 }
 
-#character { 
-    width: 40px; 
-    height: 40px; 
-    font-size: 35px; 
-    position: absolute; 
-    bottom: 0; 
-    left: 50px; 
+/* Box Human Construction */
+#character { width: 40px; height: 60px; position: absolute; bottom: 0; left: 50px; }
+.head { width: 15px; height: 15px; background: #333; margin: 0 auto; border-radius: 2px; }
+.body { width: 10px; height: 25px; background: #333; margin: 0 auto; }
+.leg { width: 4px; height: 15px; background: #333; position: absolute; bottom: 5px; }
+.left { left: 14px; animation: run 0.3s infinite alternate; }
+.right { left: 22px; animation: run 0.3s infinite alternate-reverse; }
+
+@keyframes run {
+    from { transform: rotate(-20deg); }
+    to { transform: rotate(20deg); }
 }
 
-#block { 
-    width: 30px; 
-    height: 30px; 
-    font-size: 25px; 
-    position: absolute; 
-    bottom: 0; 
-    left: 600px; 
-}
+/* Box Tree Construction */
+#block { width: 30px; height: 40px; position: absolute; bottom: 0; left: 600px; }
+.leaves { width: 30px; height: 25px; background: #2ed573; border-radius: 5px; }
+.trunk { width: 8px; height: 15px; background: #747d8c; margin: 0 auto; }
 
-.animate { 
-    animation: jump 0.5s linear; 
-}
-
+.animate { animation: jump 0.6s ease-out; }
 @keyframes jump {
     0% { bottom: 0; }
-    30% { bottom: 100px; }
-    70% { bottom: 100px; }
+    50% { bottom: 100px; }
     100% { bottom: 0; }
 }
 
-/* Pause Button */
-#pauseBtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 8px 15px;
-    background: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-/* Game Over Banner */
-#gameOverBanner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 30px;
-    border: 3px solid #ff4757;
-    text-align: center;
-    z-index: 100;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.restart-btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #2ed573;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
+#pauseBtn { position: absolute; top: 10px; right: 10px; padding: 8px 15px; background: #333; color: white; border: none; cursor: pointer; z-index: 10; }
+#gameOverBanner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border: 3px solid #ff4757; text-align: center; z-index: 100; border-radius: 15px; }
+.restart-btn { margin-top: 15px; padding: 10px 20px; background: #2ed573; color: white; border: none; cursor: pointer; font-weight: bold; }
 .hidden { display: none !important; }
-
 .stats { margin-top: 15px; font-size: 24px; font-weight: bold; }
