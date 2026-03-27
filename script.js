@@ -6,22 +6,27 @@ const pauseOverlay = document.getElementById("pauseOverlay");
 let score = 0;
 let isPaused = false;
 let blockPos = 600;
-let speed = 5; // Starting speed
+let speed = 5; 
 
 function gameLoop() {
     if (!isPaused) {
         blockPos -= speed;
+        
+        // If block goes off screen
         if (blockPos < -30) {
-            blockPos = 600 + Math.random() * 200; // Random distance
+            blockPos = 600 + Math.random() * 300; // Randomize gap
             score++;
-            speed += 0.2; // Gradually speeds up
+            speed += 0.3; // This increases difficulty every point!
             scoreSpan.innerHTML = score;
         }
+        
         block.style.left = blockPos + "px";
 
-        // Collision Detection
+        // Collision Logic
         let characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
-        if (blockPos < 90 && blockPos > 50 && characterBottom < 30) {
+        
+        // Check if character is hitting the block
+        if (blockPos < 90 && blockPos > 50 && characterBottom < 35) {
             alert("Game Over! Score: " + score);
             resetGame();
         }
@@ -34,6 +39,7 @@ function resetGame() {
     speed = 5;
     blockPos = 600;
     scoreSpan.innerHTML = score;
+    character.classList.remove("animate");
 }
 
 function jump() {
@@ -43,14 +49,12 @@ function jump() {
     }
 }
 
-function togglePause() {
-    isPaused = !isPaused;
-    pauseOverlay.classList.toggle("hidden");
-}
-
 document.addEventListener("keydown", (e) => {
     if (e.code === "Space") jump();
-    if (e.code === "KeyP") togglePause();
+    if (e.code === "KeyP") {
+        isPaused = !isPaused;
+        pauseOverlay.classList.toggle("hidden");
+    }
 });
 
 gameLoop();
