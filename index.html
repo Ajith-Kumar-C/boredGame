@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Jumping Dragon</title>
+    <meta charset="UTF-8">
+    <title>Dragon Run</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game">
-        <div id="character"></div>
-        <div id="block"></div>
+    <div id="gameGuidance">Press Space to Jump | P to Pause</div>
+    <div class="game" id="gameCanvas">
+        <div id="character">🏃</div>
+        <div id="block">🌵</div>
+        <div id="pauseOverlay" class="hidden">PAUSED</div>
     </div>
-    <p>Score: <span id="scoreSpan">0</span></p>
+    <div class="stats">
+        <p>Score: <span id="scoreSpan">0</span></p>
+        <p>High Score: <span id="highScore">0</span></p>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
