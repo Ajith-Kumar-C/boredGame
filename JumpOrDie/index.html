@@ -2,52 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lego Jump Arcade</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <title>DRAGON JUMP</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="style.css"> </head>
 <body>
     <div class="ui-container">
-        <a href="../index.html" id="homeBtn">⬅ Home</a>
-        <div class="stats-top">
-            <span>SCORE: <span id="scoreSpan">0</span></span>
-            <span style="color: #ff4757;">HI: <span id="highScoreSpan">0</span></span>
-        </div>
+        <a href="../index.html" id="homeBtn">⬅ HOME</a>
+        <div class="stats-top">SCORE: <span id="scoreSpan">0</span> | HI: <span id="highScoreSpan">0</span></div>
     </div>
 
-    <div class="game" id="gameCanvas">
-        <div id="startScreen">
-            <h1>LEGO JUMP</h1>
-            <p>SPACE TO JUMP | P TO PAUSE</p>
-            <button class="start-btn" onclick="startGame()">START GAME</button>
+    <div class="game-container" id="gameCanvas">
+        <div id="startScreen" class="banner" style="background: var(--lego-yellow); width: 80%;">
+            <h1>DRAGON JUMP</h1>
+            <button class="start-btn" onclick="startGame()">START</button>
         </div>
 
-        <div class="cloud" style="top: 20px; left: 100px;">☁️</div>
-        <div class="cloud" style="top: 50px; left: 400px;">☁️</div>
-        
+        <div class="cloud" style="top: 10%; left: 20%;">☁️</div>
         <div id="character" class="hidden">
-            <div class="lego-nub"></div>
-            <div class="lego-head"></div>
-            <div class="lego-torso"></div>
-            <div class="lego-legs">
-                <div class="leg left"></div>
-                <div class="leg right"></div>
-            </div>
+            <div class="lego-nub"></div><div class="lego-head"></div>
+            <div class="lego-torso"></div><div class="lego-legs"><div class="leg left"></div><div class="leg right"></div></div>
         </div>
-        
         <div id="treeContainer"></div>
         
-        <button id="pauseBtn" class="hidden" onclick="togglePause()">Pause</button>
-
-        <div id="gameOverBanner" class="hidden">
+        <div id="gameOverBanner" class="banner hidden">
             <h2>CRASHED!</h2>
-            <div class="banner-scores">
-                <p>SCORE: <span id="finalScore">0</span></p>
-                <p>BEST: <span id="bestScore">0</span></p>
-            </div>
-            <button class="restart-btn" onclick="resetGame()">TRY AGAIN</button>
+            <p>SCORE: <span id="finalScore">0</span></p>
+            <button class="restart-btn" onclick="resetGame()">RETRY</button>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
