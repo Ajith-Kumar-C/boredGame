@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dragon Run</title>
+    <title>Jump Or Die</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameGuidance">Press Space to Jump | P to Pause</div>
+    <div id="gameGuidance">Press Space to Jump | Click Pause to stop</div>
     <div class="game" id="gameCanvas">
         <div id="character">🏃</div>
         <div id="block">🌵</div>
-        <div id="pauseOverlay" class="hidden">PAUSED</div>
+        
+        <button id="pauseBtn" onclick="togglePause()">Pause</button>
+
+        <div id="gameOverBanner" class="hidden">
+            <h1>GAME OVER</h1>
+            <p>Score: <span id="finalScore">0</span></p>
+            <button class="restart-btn" onclick="resetGame()">Try Again</button>
+        </div>
     </div>
+
     <div class="stats">
         <p>Score: <span id="scoreSpan">0</span></p>
-        <p>High Score: <span id="highScore">0</span></p>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
