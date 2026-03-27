@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jump Or Die</title>
+    <title>Jump Or Die - Arcade</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameGuidance">Press Space to Jump | P to Pause</div>
+    <div id="gameGuidance">Space to Jump | P to Pause</div>
     <div class="game" id="gameCanvas">
+        <div class="cloud" style="top: 20px; left: 100px;">☁️</div>
+        <div class="cloud" style="top: 60px; left: 350px;">☁️</div>
+        
         <div id="character">
             <div class="head"></div>
             <div class="body"></div>
@@ -15,22 +18,21 @@
             <div class="leg right"></div>
         </div>
         
-        <div id="block">
-            <div class="leaves"></div>
-            <div class="trunk"></div>
-        </div>
+        <div id="treeContainer"></div>
         
         <button id="pauseBtn" onclick="togglePause()">Pause</button>
 
         <div id="gameOverBanner" class="hidden">
             <h1>GAME OVER</h1>
             <p>Score: <span id="finalScore">0</span></p>
+            <p>Best: <span id="bestScore">0</span></p>
             <button class="restart-btn" onclick="resetGame()">Try Again</button>
         </div>
     </div>
 
     <div class="stats">
-        <p>Score: <span id="scoreSpan">0</span></p>
+        <span>Score: <span id="scoreSpan">0</span></span>
+        <span style="margin-left: 20px; color: #ff4757;">HI: <span id="highScoreSpan">0</span></span>
     </div>
 
     <script src="script.js"></script>
